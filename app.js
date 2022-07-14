@@ -7,17 +7,16 @@ const start = document.querySelector(".btn__reset");
 const startScreen = document.getElementById('overlay');
 
 start.addEventListener('click', () => {
-    
     startScreen.style.display = "none";
 });
 
 
 const phrases = [
-    'Boulevard of Broken Dreams',
-    'Welcome to the Black Parade',
-    'Dear Maria Count me in',
-    'I Write Sins not Tragedies',
-    'Teenage Dirtbag'
+    'Ice Cream',
+    'Pudding',
+    'Cake',
+    'Truffle',
+    'Cinnamon Roll'
 ];
 
 //Gets a random phrase from the phrases array
@@ -38,7 +37,7 @@ function addPhraseToDisplay(arr) {
         li.textContent = arr[i];
         ul.appendChild(li);
 
-        if (arr[i].textContent === " "){
+        if (arr[i] === " "){
             li.classList.add("space");
         } else{
             li.classList.add("letter");
@@ -49,3 +48,26 @@ function addPhraseToDisplay(arr) {
 };
 
 addPhraseToDisplay(randomPhrase);
+
+function checkLetter(btn) {
+    let letter = document.querySelectorAll('li');
+    let match = null;
+    for (i=0; i < letter.length; i++) {
+        if (btn.textContent === letter[i].textContent) {
+            letter[i].classList.add("show");
+            match = btn.textContent;
+        } 
+    }
+
+    return match;
+};
+
+qwerty.addEventListener('click', (e) => {
+    let btn = e.target;
+    if (btn.tagName = "button") {
+        btn.classList.add("chosen")
+    }
+    checkLetter(btn);
+});
+
+
