@@ -12,11 +12,11 @@ start.addEventListener('click', () => {
 
 
 const phrases = [
-    'Ice Cream',
-    'Pudding',
-    'Cake',
-    'Truffle',
-    'Cinnamon Roll'
+    'ice cream',
+    'pudding',
+    'cake',
+    'truffle',
+    'cinnamon roll'
 ];
 
 //Gets a random phrase from the phrases array
@@ -64,10 +64,18 @@ function checkLetter(btn) {
 
 qwerty.addEventListener('click', (e) => {
     let btn = e.target;
-    if (btn.tagName = "button") {
+    if (e.target.tagName === 'BUTTON' && e.target.tagName != "chosen") {
         btn.classList.add("chosen")
     }
-    checkLetter(btn);
+    const letterFound = checkLetter(btn);
+
+    if(letterFound === null ) {
+        const tries = document.querySelectorAll('.tries');
+        const triesArray = Array.from(tries);
+        for (i = 0; i < triesArray.length; i++) {
+            triesArray[i].style.display = 'none';
+        }
+    }
 });
 
 
