@@ -1,5 +1,8 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
+const ul = document.querySelector('ul');
+const li = document.querySelectorAll('li');
+const keyrow = document.querySelectorAll('keyrow');
 let missed = 0;
 
 //Hide's the start screen
@@ -69,6 +72,7 @@ qwerty.addEventListener('click', (e) => {
     let btn = e.target;
     if (e.target.tagName === 'BUTTON' && e.target.tagName != "chosen") {
         btn.classList.add("chosen")
+        btn.disabled = true;
     }
     const letterFound = checkLetter(btn);
 
@@ -96,7 +100,18 @@ function checkWin() {
         //Changes the start button in the win/lose screen to a reset button 
         //that refreshes the page
         start.addEventListener('click', () => {
-            window.location.reload();
+           
+
+
+
+
+
+
+
+
+
+            addPhraseToDisplay(randomPhrase);
+            startScreen.style.display = "none";
         });
 
     } else if (missed >= 5) {
@@ -108,7 +123,7 @@ function checkWin() {
           }, 500)
 
         start.addEventListener('click', () => {
-            window.location.reload();
+            startScreen.style.display = "none";
         });
     }
 
