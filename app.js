@@ -3,6 +3,7 @@ const phrase = document.getElementById('phrase');
 const ul = document.querySelector('ul');
 const li = document.querySelectorAll('li');
 const keyrow = document.querySelectorAll('keyrow');
+const button = document.getElementsByTagName('button');
 let missed = 0;
 
 //Hide's the start screen
@@ -70,7 +71,7 @@ function checkLetter(btn) {
 //and change the hearts to lost hearts if the wrong letter is chosen
 qwerty.addEventListener('click', (e) => {
     let btn = e.target;
-    if (e.target.tagName === 'BUTTON' && e.target.tagName != "chosen") {
+    if (e.target.tagName === 'BUTTON' && e.target.className != "chosen") {
         btn.classList.add("chosen")
         btn.disabled = true;
     }
@@ -83,6 +84,29 @@ qwerty.addEventListener('click', (e) => {
     }
     checkWin();
 });
+
+function resetGame() {
+    start.addEventListener('click', () => {
+        startScreen.classList.remove('win');
+        startScreen.classList.remove('lose');
+        for (i = 0; i < button.length; i++) {
+            if (button[i].className === 'chosen') {
+                button[i].classList.remove('chosen');
+                button[i].disabled = false;
+            }
+        }
+        phrase.innerHTML = '';
+        let newPhrase = getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(newPhrase);
+        const hearts = document.getElementsByTagName('img');
+        for (i=0; i < hearts.length; i++) {
+            if (hearts[i].src = "images/lostHeart.png") {
+                hearts[i].src = "images/liveHeart.png"
+            }
+        }
+        missed = 0;
+    });
+}
 
 //Function that checks for a win
 let letters = document.getElementsByClassName('letter');
@@ -97,36 +121,15 @@ function checkWin() {
             start.textContent = "Reset",
             startScreen.style.display = "flex"
           }, 500)
-        //Changes the start button in the win/lose screen to a reset button 
-        //that refreshes the page
-        start.addEventListener('click', () => {
-           
-
-
-
-
-
-
-
-
-
-            addPhraseToDisplay(randomPhrase);
-            startScreen.style.display = "none";
-        });
-
+          
     } else if (missed >= 5) {
         setTimeout(() => {
             startScreen.className = "lose",
             startScreen.children[0].textContent = "Try Again",
             start.textContent = "Reset",
             startScreen.style.display = "flex"
-          }, 500)
-
-        start.addEventListener('click', () => {
-            startScreen.style.display = "none";
-        });
+          }, 500);
     }
-
+resetGame();
    
 }
-
