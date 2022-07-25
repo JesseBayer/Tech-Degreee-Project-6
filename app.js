@@ -4,12 +4,13 @@ const ul = document.querySelector('ul');
 const li = document.querySelectorAll('li');
 const keyrow = document.querySelectorAll('keyrow');
 const button = document.getElementsByTagName('button');
+const start = document.querySelector(".btn__reset");
+const startScreen = document.getElementById('overlay');
+let letters = document.getElementsByClassName('letter');
+let shows = document.getElementsByClassName('show');
 let missed = 0;
 
 //Hide's the start screen
-const start = document.querySelector(".btn__reset");
-const startScreen = document.getElementById('overlay');
-
 start.addEventListener('click', () => {
     startScreen.style.display = "none";
 });
@@ -46,9 +47,7 @@ function addPhraseToDisplay(arr) {
         } else{
             li.classList.add("letter");
         }
-
     }
-
 };
 
 addPhraseToDisplay(randomPhrase);
@@ -109,9 +108,6 @@ function resetGame() {
 }
 
 //Function that checks for a win
-let letters = document.getElementsByClassName('letter');
-let shows = document.getElementsByClassName('show');
-
 function checkWin() {
     if (letters.length === shows.length) {
         //Added Timeout function because I thought the overlay change was jarring
@@ -130,6 +126,5 @@ function checkWin() {
             startScreen.style.display = "flex"
           }, 500);
     }
-resetGame();
-   
+resetGame();  
 }
